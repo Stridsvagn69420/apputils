@@ -1,0 +1,1 @@
+// TODO: Add functions that return config paths based on the app id (basically short name, equivalent to Rust crate name)

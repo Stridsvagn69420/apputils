@@ -1,0 +1,13 @@
+[package]
+name = "apputil"
+version = "0.1.0"
+edition = "2021"
+description = "A Rust crate for the small but mandatory steps of your app"
+repository = "https://github.com/Stridsvagn69420/apputil.git"
+homepage = "https://github.com/Stridsvagn69420/apputil"
+documentation = "https://docs.rs/apputil"
+authors = ["Stridsvagn69420"]
+categories = ["command-line-interface", "config"]
+exclude = ["/target/", "/.vscode/"]
+
+[dependencies]
