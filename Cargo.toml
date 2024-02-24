@@ -9,5 +9,6 @@ documentation = "https://docs.rs/apputil"
 authors = ["Stridsvagn69420"]
 categories = ["command-line-interface", "config"]
 exclude = ["/target/", "/.vscode/"]
+license = "MIT"
 
 [dependencies]
