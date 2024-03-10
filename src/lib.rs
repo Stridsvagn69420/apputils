@@ -1,7 +1,17 @@
-//! A Rust crate for the small but mandatory steps of your app
+//! A lightweight Rust crate to help you build awesome tools
+//!
+//! It's designed to be framework-less and relatively simple while providing awesome helper functions for basic tasks that almost any program needs to do. These tasks include reading a config file with multiple paths (user and global), printing with color similar to `println!()` and getting user directories cross-platform.
 //! 
-//! It's designed to be framework-less and relatively simple while providing awesome helper functions for basic tasks that almost any program needs to do.  
-//! These tasks include reading a config file with multiple paths (user and global), printing with color similar to `println!()` and getting user directories cross-platform.
+//! To add it to your dependencies, either run:
+//! ```bash
+//! cargo add apputils
+//! ```
+//! 
+//! Or update your `Cargo.toml`:
+//! ```toml
+//! [dependencies]
+//! apputils = 0.1.0
+//! ```
 
 
 /// Config file helpers
@@ -18,8 +28,8 @@ pub mod config;
 /// 
 /// ```rust
 /// // Import Colors enum and paintln macro
-/// use apputil::console::Colors;
-/// use apputil::paintln;
+/// use apputils::console::Colors;
+/// use apputils::paintln;
 /// 
 /// paintln!(Colors::White, "I'm white.");
 /// paintln!(Colors::Black, "I'm black.");

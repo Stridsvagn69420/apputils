@@ -1,14 +1,15 @@
 [package]
-name = "apputil"
+name = "apputils"
 version = "0.1.0"
 edition = "2021"
-description = "A Rust crate for the small but mandatory steps of your app"
-repository = "https://github.com/Stridsvagn69420/apputil.git"
-homepage = "https://github.com/Stridsvagn69420/apputil"
-documentation = "https://docs.rs/apputil"
+description = "A lightweight Rust crate to help you build awesome tools"
+repository = "https://github.com/Stridsvagn69420/apputils.git"
+homepage = "https://github.com/Stridsvagn69420/apputils"
+documentation = "https://docs.rs/apputils"
 authors = ["Stridsvagn69420"]
 categories = ["command-line-interface", "config"]
 exclude = ["/target/", "/.vscode/"]
 license = "MIT"
+readme = "README.md"
 
 [dependencies]

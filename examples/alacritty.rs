@@ -1,6 +1,6 @@
-use apputil::config::cascade;
-use apputil::console::Colors;
-use apputil::paintln;
+use apputils::config::cascade;
+use apputils::console::Colors;
+use apputils::paintln;
 
 fn main() {
 	paintln!(Colors::Rgb(42, 164, 69), "Attempting to read alacritty config file...");
