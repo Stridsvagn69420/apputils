@@ -10,7 +10,7 @@
 //! Or update your `Cargo.toml`:
 //! ```toml
 //! [dependencies]
-//! apputils = 0.1.0
+//! apputils = "0.1.0"
 //! ```
 
 
