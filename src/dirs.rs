@@ -9,7 +9,7 @@ use std::env::{var, VarError};
 pub fn home_dir() -> Result<PathBuf, VarError> {
 	#[cfg(target_family = "windows")]
 	let envstr = var("USERPROFILE")?;
-	#[cfg(not(target_family = "windows"))]
+	#[cfg(target_family = "unix")]
 	let envstr = var("HOME")?;
 	Ok(PathBuf::from(envstr))
 }
