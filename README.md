@@ -11,25 +11,25 @@ cargo add apputils
 Or update your `Cargo.toml`:
 ```toml
 [dependencies]
-apputils = "0.1.0"
+apputils = "0.1.2"
 ```
 
-## Submodules
+## Categories
 - `dirs`: User directories using environment variables
 - `console`: Console pretty-print
 - `config`: Config file helpers
 
-There's currently one example, `alacritty`, that you can run. It uses both the `config`-module (thus `dirs`) as well as `console`:
+There's currently one example, `alacritty`, that you can run. It uses both the `config`-functionality (thus `dirs`) as well as `console`:
 ```rust
-use apputil::config::cascade;
-use apputil::console::Colors;
-use apputil::paintln;
+use apputils::config::local_file;
+use apputils::Colors;
+use apputils::paintln;
 
 fn main() {
 	paintln!(Colors::Rgb(42, 164, 69), "Attempting to read alacritty config file...");
-	match cascade("alacritty", "alacritty.toml") {
-		Some(data) => println!("Your alacritty config:\n{}", data),
-		None => paintln!(Colors::Red, "You don't seem to have an alacritty config!"),
+	match local_file("alacritty", "alacritty.toml") {
+		Ok(data) => println!("Your alacritty config:\n{}", data),
+		Err(_) => paintln!(Colors::Red, "You don't seem to have an alacritty config!"),
 	}
 }
 ```
