@@ -25,6 +25,22 @@
 //! paintln!(Colors::Red, "I'm red.");
 //! paintln!(Colors::Rgb(35, 170, 242), "I'm #23AAF2.");
 //! ```
+//! 
+//! ## Reading config and data files
+//! An example with [wallpaper-dl](https://crates.io/crates/wallpaper-dl)'s file structure:
+//! ```rust
+//! use apputils::config::{Cfg, Appdata};
+//! use apputils::dirs::{config_home, data_home};
+//! 
+//! const APP_NAME: &str = "wallpaper-dl";
+//! const CONFIG_FILE: &str = "config.toml";
+//! const DB_FILE: &str = "wallpapers.toml";
+//! 
+//! let cfg_path = Cfg::path(APP_NAME, CONFIG_FILE);
+//! let db_path = Appdata::path(APP_NAME, DB_FILE);
+//! 
+//! assert_eq!(cfg_path, config_home().unwrap().join(APP_NAME).join(CONFIG_FILE)); 	// e.g. ~/.config/wallpaper-dl/config.toml
+//! assert_eq!(db_path, data_home().unwrap().join(APP_NAME).join(DB_FILE)); 		// e.g. ~/.local/share/wallpaper-dl/wallpapers.toml
 
 use std::fmt;
 
@@ -101,9 +117,7 @@ macro_rules! paintln {
 /// Config file helpers
 /// 
 /// Functions to aid in loading and managing config files.
-/// 
-/// What you'd want to use 99% of the time is either [cascade](crate::config::cascade) or [local_file](crate::config::cascade),
-/// depending on if your app should also read global config files.
+/// It consists mostly of neat wrappers.
 pub mod config;
 
 /// User environment wrappers

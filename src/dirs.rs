@@ -5,7 +5,10 @@ use std::env::{var, VarError};
 ///
 /// Alternative to [std::env::home_dir].  
 /// On Windows, it reads the `USERPFOILE` environment variable.  
-/// On Unix-like systems, it reads the `HOME` environment variable.  
+/// On Unix-like systems, it reads the `HOME` environment variable.
+/// 
+/// Can be unwrapped, because most programs will run in an environment where the required envvars are set.
+/// You wouldn't `unset $HOME`!
 pub fn home_dir() -> Result<PathBuf, VarError> {
 	#[cfg(target_family = "windows")]
 	let envstr = var("USERPROFILE")?;
