@@ -8,7 +8,7 @@ const DB_FILE: &str = "wallpapers.toml";
 fn main() {
 	paint!(Colors::Green, "Your wallpaper-dl config: ");
 	match Cfg::read(APP_NAME, CONFIG_FILE) {
-		Err(_) => paintln!(Colors::Red, "Not found"),
+		Err(_) => paintln!(Colors::YellowBold, "Not found"),
 		Ok(x) => println!("\n{x}")
 	}
 
@@ -16,7 +16,7 @@ fn main() {
 
 	paint!(Colors::Blue, "Your wallpaper database: ");
 	match Appdata::read_str(APP_NAME, DB_FILE) {
-		Err(_) => paintln!(Colors::Red, "Not found"),
+		Err(_) => paintln!(Colors::RedBold, "Not found"),
 		Ok(x) => println!("\n{x}")
 	}
 }
