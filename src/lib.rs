@@ -103,6 +103,7 @@ impl Colors {
 		<I as IntoIterator>::Item: fmt::Display,
 	{
 		self.print(sep, vec);
+		println!();
 	}
 }
 
