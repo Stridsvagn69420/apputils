@@ -1,5 +1,5 @@
 use std::path::PathBuf;
-use std::env::{var, VarError};
+use std::env::var;
 
 /// Home Directory
 ///
@@ -9,12 +9,12 @@ use std::env::{var, VarError};
 /// 
 /// Can be unwrapped, because most programs will run in an environment where the required envvars are set.
 /// You wouldn't `unset $HOME`!
-pub fn home_dir() -> Result<PathBuf, VarError> {
+pub fn home_dir() -> PathBuf {
 	#[cfg(target_family = "windows")]
-	let envstr = var("USERPROFILE")?;
+	let envstr = var("USERPROFILE");
 	#[cfg(target_family = "unix")]
-	let envstr = var("HOME")?;
-	Ok(PathBuf::from(envstr))
+	let envstr = var("HOME");
+	PathBuf::from(envstr.unwrap_or_default())
 }
 
 /// Directory PathBuf Builder
@@ -24,15 +24,15 @@ pub fn home_dir() -> Result<PathBuf, VarError> {
 /// `xdg`: The XDG environment variable  
 /// `home_alt`: The default value in the home directory  
 /// `win`: Windows environment variable  
-fn xdg_path(xdg: &str, home_alt: &str, win: &str) -> Result<PathBuf, VarError> {
+fn xdg_path(xdg: &str, home_alt: &str, win: &str) -> PathBuf {
 	if cfg!(target_family = "unix") {
 		let confighome = match var(xdg) {
     		Ok(s) => PathBuf::from(s),
-    		Err(_) => home_dir()?.join(home_alt),
+    		Err(_) => home_dir().join(home_alt),
 		};
-		Ok(confighome)
+		confighome
 	} else {
-		Ok(PathBuf::from(var(win)?))
+		PathBuf::from(var(win).unwrap_or_default())
 	}
 }
 
@@ -42,7 +42,7 @@ fn xdg_path(xdg: &str, home_alt: &str, win: &str) -> Result<PathBuf, VarError> {
 /// 
 /// On Unix, it complies with `XDG_CONFIG_HOME`.  
 /// On Windows, it returns the value of `APPDATA`.
-pub fn config_home() -> Result<PathBuf, VarError> {
+pub fn config_home() -> PathBuf {
 	xdg_path("XDG_CONFIG_HOME", ".config", "APPDATA")
 }
 
@@ -51,7 +51,7 @@ pub fn config_home() -> Result<PathBuf, VarError> {
 /// Gets the user cache directory.  
 /// On Unix, it complies with `XDG_CONFIG_HOME`.  
 /// On Windows, it returns the value of `TEMP`.
-pub fn cache_home() -> Result<PathBuf, VarError> {
+pub fn cache_home() -> PathBuf {
 	xdg_path("XDG_CACHE_HOME", ".cache", "TEMP")
 }
 
@@ -60,7 +60,7 @@ pub fn cache_home() -> Result<PathBuf, VarError> {
 /// Gets the user data directory.  
 /// On Unix, it complies with `XDG_DATA_HOME`.  
 /// On Windows, it returns the value of `APPDATA`.
-pub fn data_home() -> Result<PathBuf, VarError> {
+pub fn data_home() -> PathBuf {
 	xdg_path("XDG_DATA_HOME", ".local/share", "APPDATA")
 }
 
@@ -69,6 +69,6 @@ pub fn data_home() -> Result<PathBuf, VarError> {
 /// Gets the app state directory.  
 /// On Unix, it complies with `XDG_STATE_HOME`.  
 /// On Windows, it returns the value of `LOCALAPPDATA`.
-pub fn state_home() -> Result<PathBuf, VarError> {
+pub fn state_home() -> PathBuf {
 	xdg_path("XDG_STATE_HOME", ".local/state", "LOCALAPPDATA")
 }
